@@ -4,16 +4,14 @@ app.use(express.logger());
 
 var fs = require('fs');
 
+var indexFile;
+fs.readFile('./index.html', function (err, data) {
+  if (err) throw err;
+  indexFile = new Buffer(data).toString();
+});
 
 
-app.get('/', function(request, response) {
-
-  var indexFile;	
-  fs.readFile('index.html', function (err, data) {
-    if (err) throw err;
-    indexFile = new Buffer(data).toString();
-  });	
-
+app.get('/', function(request, response) {	
   response.send(indexFile);
 });
 
